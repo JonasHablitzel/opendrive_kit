@@ -1,0 +1,12 @@
+[package]
+name = "opendrive_kit_core"
+version.workspace = true
+license.workspace = true
+authors.workspace = true
+edition.workspace = true
+
+[dependencies]
+bezier-rs = "0.4.0"
+uom = { version = "0.36.0",default-features = false, features = ["f64", "si", "std"] }
+vec1 = "1.12.1"
+

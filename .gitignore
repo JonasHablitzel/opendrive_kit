@@ -1,0 +1,40 @@
+.DS_Store
+__MACOSX
+
+# C++ and CMake stuff:
+*.a
+*.bin
+*.o
+/arrow/
+/build/
+**/build-msvc/
+**/CMakeFiles/
+**/CMakeCache.txt
+**/Makefile
+**/cmake_install.cmake
+_deps
+**/.cache/
+**/rerun_cpp/docs/html
+**/rerun_cpp/docs/xml
+*.tgz
+
+# Rust compile target directory:
+**/target
+**/target_ra
+**/target_wasm
+
+# Python virtual environment:
+**/venv*
+**/.venv*
+.python-version
+
+# Python build artifacts:
+__pycache__
+*.pyc
+*.pyd
+*.so
+**/.pytest_cache
+
+# Various builds
+dist
+wheels
