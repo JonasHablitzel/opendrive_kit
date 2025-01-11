@@ -1,8 +1,7 @@
-use std::collections::HashMap;
 use crate::road::Road;
-
+use std::collections::HashMap;
 
 pub struct OpenDriveMap {
     pub name: String,
-    pub id_to_road: HashMap<String,Road>,
+    pub roads: HashMap<u32, Road>,
 }

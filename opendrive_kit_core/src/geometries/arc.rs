@@ -1,11 +1,11 @@
 use crate::geometries::RoadGeometry;
 use crate::math::{Point2D, Tangent2D};
-use uom::si::f64::{ReciprocalLength, Angle,Length};
+use std::f64::consts::FRAC_PI_2;
 use uom::si::angle::radian;
+use uom::si::f64::{Angle, Length, ReciprocalLength};
 use uom::si::length::meter;
 use uom::si::ratio::ratio;
 use uom::si::reciprocal_length::reciprocal_meter;
-use std::f64::consts::FRAC_PI_2;
 
 pub struct Arc {
     /// Length of the element's reference line
@@ -22,22 +22,20 @@ pub struct Arc {
     pub curvature: ReciprocalLength,
 }
 
-
 impl RoadGeometry for Arc {
-
     fn position_at(&self, s: Length) -> Point2D {
         // (s - s0) is a length. curvature is 1/length. Multiplying them gives a dimensionless f64.
         let ds: f64 = (s - self.s).get::<meter>();
-        let c: f64 = self.curvature.get::<reciprocal_meter>(); 
+        let c: f64 = self.curvature.get::<reciprocal_meter>();
         // heading in radians
-        let hdg0: f64 = self.hdg.get::<radian>(); 
-        
+        let hdg0: f64 = self.hdg.get::<radian>();
+
         // angle_at_s is dimensionless in code, but physically it's in radians
         let angle_at_s = ds * c - FRAC_PI_2;
-        
+
         // r is 1 / curvature => length in meters
         let r = 1.0 / c;
-        
+
         // compute new X, Y in f64
         let xs = r * ((hdg0 + angle_at_s).cos() - hdg0.sin()) + self.x.get::<meter>();
         let ys = r * ((hdg0 + angle_at_s).sin() + hdg0.cos()) + self.y.get::<meter>();
@@ -50,9 +48,9 @@ impl RoadGeometry for Arc {
     }
 
     fn tangent_at(&self, s: Length) -> Tangent2D {
-        let ds = (s - self.s).get::<meter>();    // [m]
-        let c  = self.curvature.get::<reciprocal_meter>(); // [1/m]
-        let hdg0 = self.hdg.get::<radian>();                     // [rad], but typed as f64
+        let ds = (s - self.s).get::<meter>(); // [m]
+        let c = self.curvature.get::<reciprocal_meter>(); // [1/m]
+        let hdg0 = self.hdg.get::<radian>(); // [rad], but typed as f64
 
         let angle = std::f64::consts::FRAC_PI_2 - c * ds - hdg0;
 
@@ -62,11 +60,9 @@ impl RoadGeometry for Arc {
         Tangent2D { dx: dx, dy: dy }
     }
 
-
     fn curvature_at(&self, _s: Length) -> ReciprocalLength {
         self.curvature
     }
-
 
     fn sample_s(&self, eps: f64) -> Vec<Length> {
         // 1) Step size in meters (0.01 rad / curvature = meters)
@@ -74,7 +70,7 @@ impl RoadGeometry for Arc {
 
         // 2) Start and end along the arc
         let arc_start = self.s;
-        let arc_end   = self.s + self.length;
+        let arc_end = self.s + self.length;
 
         // 3) Compute how many steps fit in `self.length`
         //    (length / step_len is dimensionless, so use `.get::<ratio>()`)
@@ -102,5 +98,4 @@ impl RoadGeometry for Arc {
     fn s_end(&self) -> Length {
         self.s + self.length
     }
-
 }

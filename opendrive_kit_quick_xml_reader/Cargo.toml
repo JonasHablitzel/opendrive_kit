@@ -1,0 +1,12 @@
+[package]
+name = "opendrive_kit_quick_xml_reader"
+version.workspace = true
+license.workspace = true
+authors.workspace = true
+edition.workspace = true
+
+[dependencies]
+quick-xml = { version = "0.37.2", features = ["serde-types", "serialize"] }
+serde = "1.0.217"
+
+

@@ -6,7 +6,6 @@ pub struct Point2D {
     pub y: Length,
 }
 
-
 impl Point2D {
     pub fn new(x: Length, y: Length) -> Self {
         Self { x, y }
@@ -20,13 +19,11 @@ pub struct Tangent2D {
     pub dy: f64,
 }
 
-
 impl Tangent2D {
     pub fn new(dx: f64, dy: f64) -> Self {
         Self { dx, dy }
     }
 }
-
 
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct Vec3D {

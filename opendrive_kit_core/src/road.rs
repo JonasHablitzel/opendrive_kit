@@ -1,18 +1,19 @@
-use uom::si::f64::Length;
-use vec1::Vec1;
 use crate::geometries::geometry::Geometry;
+use crate::lanesection::Lanesection;
+use std::collections::BTreeMap;
+use uom::si::f64::Length;
 
 pub enum TrafficRule {
     LHT,
-    RHT
+    RHT,
 }
 
-
 pub struct Road {
-    pub id: String,
+    pub id: u32,
     pub junction: String,
-    pub name: String,
-    pub traffic_rule: TrafficRule,
     pub length: Length,
-    pub plan_view: Vec1<Geometry>,
+    pub name: Option<String>,
+    pub rule: Option<TrafficRule>,
+    pub plan_view: BTreeMap<Length, Geometry>,
+    pub lane_sections: BTreeMap<Length, Lanesection>,
 }

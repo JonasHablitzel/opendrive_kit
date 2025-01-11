@@ -1,7 +1,7 @@
-use uom::si::reciprocal_length::reciprocal_meter;
-use uom::si::f64::{Angle, ReciprocalLength, Length};
 use crate::geometries::RoadGeometry;
 use crate::math::{Point2D, Tangent2D};
+use uom::si::f64::{Angle, Length, ReciprocalLength};
+use uom::si::reciprocal_length::reciprocal_meter;
 
 pub struct Line {
     /// Length of the element's reference line
@@ -17,16 +17,16 @@ pub struct Line {
 }
 
 impl RoadGeometry for Line {
-    fn position_at(&self, s:Length) -> Point2D {
+    fn position_at(&self, s: Length) -> Point2D {
         let x = (self.hdg.cos() * (s - self.s)) + self.x;
         let y = (self.hdg.sin() * (s - self.s)) + self.y;
-        Point2D{x, y}
+        Point2D { x, y }
     }
 
-    fn tangent_at(&self, _s:Length) -> Tangent2D {
+    fn tangent_at(&self, _s: Length) -> Tangent2D {
         let dx = self.hdg.cos().value;
-        let dy = self.hdg.sin().value;        
-        Tangent2D{dx, dy}
+        let dy = self.hdg.sin().value;
+        Tangent2D { dx, dy }
     }
 
     fn sample_s(&self, _eps: f64) -> Vec<Length> {
@@ -46,14 +46,11 @@ impl RoadGeometry for Line {
     }
 }
 
-
-
-
 #[cfg(test)]
 mod tests {
     use super::*; // Import the implementation and dependencies
-    use uom::si::f64::{Angle, Length};
     use uom::si::angle::radian;
+    use uom::si::f64::{Angle, Length};
     use uom::si::length::meter;
 
     #[test]
@@ -113,8 +110,8 @@ mod tests {
         assert!((grad.dy - 0.70710678118).abs() < 1e-10); // sin(45 degrees)
 
         let p1 = line.position_at(Length::new::<meter>(10.0));
-        assert!((p1.x  - Length::new::<meter>(17.707)).value < 1e-6);
-        assert!((p1.y  - Length::new::<meter>(27.707)).value < 1e-6);
+        assert!((p1.x - Length::new::<meter>(17.707)).value < 1e-6);
+        assert!((p1.y - Length::new::<meter>(27.707)).value < 1e-6);
     }
 
     #[test]
@@ -128,7 +125,7 @@ mod tests {
         };
 
         let p1 = line.position_at(Length::new::<meter>(20.0)); // same values as before but we start now from 10 so 20-10 =10 again.
-        assert!((p1.x  - Length::new::<meter>(17.707)).value < 1e-6);
-        assert!((p1.y  - Length::new::<meter>(27.707)).value < 1e-6);
+        assert!((p1.x - Length::new::<meter>(17.707)).value < 1e-6);
+        assert!((p1.y - Length::new::<meter>(27.707)).value < 1e-6);
     }
 }

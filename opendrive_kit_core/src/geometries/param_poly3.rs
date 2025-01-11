@@ -1,8 +1,7 @@
-
 use uom::si::f64::{Angle, Length};
 pub enum ParamPoly3pRange {
     ArcLength,
-    Normalized
+    Normalized,
 }
 
 pub struct ParamPoly3 {
@@ -26,5 +25,3 @@ pub struct ParamPoly3 {
     pub d_v: f64,
     pub p_range: ParamPoly3pRange,
 }
-
-
