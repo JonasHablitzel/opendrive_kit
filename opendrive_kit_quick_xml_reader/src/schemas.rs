@@ -20,13 +20,16 @@ pub struct Road {
     pub name: Option<String>,
 
     #[serde(rename = "@rule")]
-    pub rule: Option<String>,
-
-    #[serde(rename = "planView")]
-    pub plan_view: PlanView,
+    pub rule: Option<String>, // can be LHT or RHT but use string for compability
 
     #[serde(rename = "link")]
     pub link: Option<RoadLink>,
+
+    #[serde(rename = "lanes")]
+    pub lanes: RoadLanes,
+
+    #[serde(rename = "planView")]
+    pub plan_view: PlanView,
 }
 #[derive(Deserialize, Serialize, Debug)]
 pub struct PlanView {
@@ -127,4 +130,84 @@ pub enum GeometryTypes {
 
     #[serde(rename = "$text")]
     Text(String),
+}
+
+
+#[derive(Deserialize, Serialize, Debug)]
+pub struct  RoadLanes {
+    #[serde(rename = "laneSection")]
+    lane_section: Vec<LaneSection>,
+}
+
+#[derive(Deserialize, Serialize, Debug)]
+pub struct  LaneSection {
+    #[serde(rename = "@s")]
+    pub s: f64,
+
+    #[serde(rename = "@singleSide")]
+    pub single_side: Option<bool>,
+
+    #[serde(rename = "left")]
+    pub left: Option<RoadLanesLaneSectionLeftRight>,
+
+    #[serde(rename = "right")]
+    pub right: Option<RoadLanesLaneSectionLeftRight>,
+
+    #[serde(rename = "center")]
+    pub center: Option<RoadLanesLaneSectionCenter>,
+}
+
+
+#[derive(Deserialize, Serialize, Debug)]
+pub struct RoadLanesLaneSectionLeftRight {
+    #[serde(rename = "lane")]
+    pub lane: Vec<RoadLanesLaneSectionlrLane>,
+    
+}
+
+#[derive(Deserialize, Serialize, Debug)]
+pub struct RoadLanesLaneSectionCenter {
+    #[serde(rename = "lane")]
+    pub lane: Vec<RoadLanesLaneSectionCenterLane>,
+}
+
+
+#[derive(Deserialize, Serialize, Debug)]
+pub struct RoadLanesLaneSectionlrLane {
+    #[serde(rename = "@id")]
+    pub id: i64,
+
+    #[serde(rename = "@advisory")]
+    pub advisory: Option<String>,
+
+    #[serde(rename = "@direction")]
+    pub direction: Option<String>,
+
+    #[serde(rename = "@dynamicLaneDirection")]
+    pub dynamic_lane_direction: Option<bool>,
+
+    #[serde(rename = "@dynamicLaneType")]
+    pub dynamic_lane_type: Option<bool>,
+
+    #[serde(rename = "@level")]
+    pub level: Option<bool>,
+
+    #[serde(rename = "@roadWorks")]
+    pub road_works: Option<bool>,
+
+    #[serde(rename = "@type")]
+    pub lane_type: String,
+}
+
+
+#[derive(Deserialize, Serialize, Debug)]
+pub struct RoadLanesLaneSectionCenterLane {
+    #[serde(rename = "@id")]
+    pub id: i64,
+
+    #[serde(rename = "@level")]
+    pub level: Option<bool>,
+
+    #[serde(rename = "@type")]
+    pub lane_type: String,
 }

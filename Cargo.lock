@@ -105,6 +105,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "opendrive_kit_transform"
+version = "0.1.0"
+dependencies = [
+ "opendrive_kit_core",
+ "opendrive_kit_quick_xml_reader",
+]
+
+[[package]]
 name = "portable-atomic"
 version = "1.10.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"

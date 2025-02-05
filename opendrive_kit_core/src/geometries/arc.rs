@@ -66,7 +66,7 @@ impl RoadGeometry for Arc {
 
     fn sample_s(&self, eps: f64) -> Vec<Length> {
         // 1) Step size in meters (0.01 rad / curvature = meters)
-        let step_len = Length::new::<meter>(0.01 / self.curvature.get::<per_meter>().abs());
+        let step_len = Length::new::<meter>(0.01 / self.curvature.get::<reciprocal_meter>().abs());
 
         // 2) Start and end along the arc
         let arc_start = self.s;

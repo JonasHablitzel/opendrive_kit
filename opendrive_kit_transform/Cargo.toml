@@ -1,0 +1,10 @@
+[package]
+name = "opendrive_kit_transform"
+version.workspace = true
+license.workspace = true
+authors.workspace = true
+edition.workspace = true
+
+[dependencies]
+opendrive_kit_core = { path = "../opendrive_kit_core" }
+opendrive_kit_quick_xml_reader = { path = "../opendrive_kit_quick_xml_reader" }
