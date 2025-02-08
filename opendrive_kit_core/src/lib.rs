@@ -8,7 +8,8 @@ pub mod geometries;
 pub mod math;
 pub mod poly3;
 
-
+#[cfg(feature = "quick-xml")]
+pub mod quick_xml;
 
 pub use map::OpenDriveMap;
 pub use geometries::arc::Arc;

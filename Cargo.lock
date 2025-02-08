@@ -9,28 +9,10 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ace50bade8e6234aa140d9a2f552bbee1db4d353f69b8217bc503490fc1a9f26"
 
 [[package]]
-name = "bezier-rs"
-version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bde3aa314326e2f984f81adcb399c64b93eed3c0f2cd4258b711bf494c5741de"
-dependencies = [
- "glam",
-]
-
-[[package]]
 name = "cfg-if"
 version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
-
-[[package]]
-name = "glam"
-version = "0.24.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b5418c17512bdf42730f9032c74e1ae39afc408745ebb2acf72fbc4691c17945"
-dependencies = [
- "serde",
-]
 
 [[package]]
 name = "heck"
@@ -84,7 +66,8 @@ checksum = "1261fe7e33c73b354eab43b1273a57c8f967d0391e80353e51f764ac02cf6775"
 name = "opendrive_kit_core"
 version = "0.1.0"
 dependencies = [
- "bezier-rs",
+ "quick-xml",
+ "serde",
  "uom",
  "vec1",
 ]
@@ -94,22 +77,6 @@ name = "opendrive_kit_py"
 version = "0.1.0"
 dependencies = [
  "pyo3",
-]
-
-[[package]]
-name = "opendrive_kit_quick_xml_reader"
-version = "0.1.0"
-dependencies = [
- "quick-xml",
- "serde",
-]
-
-[[package]]
-name = "opendrive_kit_transform"
-version = "0.1.0"
-dependencies = [
- "opendrive_kit_core",
- "opendrive_kit_quick_xml_reader",
 ]
 
 [[package]]
@@ -192,9 +159,9 @@ dependencies = [
 
 [[package]]
 name = "quick-xml"
-version = "0.37.2"
+version = "0.29.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "165859e9e55f79d67b96c5d96f4e88b6f2695a1972849c15a6a3f5c59fc2c003"
+checksum = "81b9228215d82c7b61490fec1de287136b5de6f5700f6e58ea9ad61a7964ca51"
 dependencies = [
  "memchr",
  "serde",

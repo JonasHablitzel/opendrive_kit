@@ -197,8 +197,93 @@ pub struct RoadLanesLaneSectionlrLane {
 
     #[serde(rename = "@type")]
     pub lane_type: String,
+
+    #[serde(default,rename = "border")]
+    pub borders: Vec<LaneBorder>,
+
+    #[serde(default,rename = "width")]
+    pub widths: Vec<LaneBorder>,
+
+    #[serde(default,rename = "rule")]
+    pub rules: Vec<LaneRule>,
+
+    #[serde(default,rename = "speed")]
+    pub speeds: Vec<LaneSpeed>,
+
+    #[serde(default,rename = "height")]
+    pub heights: Vec<LaneHeight>,
 }
 
+#[derive(Deserialize, Serialize, Debug)]
+pub struct LaneBorder {
+    #[serde(rename = "@a")]
+    pub a: f64,
+
+    #[serde(rename = "@b")]
+    pub b: f64,
+
+    #[serde(rename = "@c")]
+    pub c: f64,
+
+    #[serde(rename = "@d")]
+    pub d: f64,
+
+    #[serde(rename = "@sOffset")]
+    pub s_offset: f64,
+}
+
+
+#[derive(Deserialize, Serialize, Debug)]
+pub struct LaneWidth {
+    #[serde(rename = "@a")]
+    pub a: f64,
+
+    #[serde(rename = "@b")]
+    pub b: f64,
+
+    #[serde(rename = "@c")]
+    pub c: f64,
+
+    #[serde(rename = "@d")]
+    pub d: f64,
+
+    #[serde(rename = "@sOffset")]
+    pub s_offset: f64,
+}
+
+#[derive(Deserialize, Serialize, Debug)]
+pub struct  LaneRule {
+    #[serde(rename = "@sOffset")]
+    pub s_offset: f64,
+
+    #[serde(rename = "@value")]
+    pub value: String,
+}
+
+#[derive(Deserialize, Serialize, Debug)]
+pub struct LaneSpeed {
+    #[serde(rename = "@sOffset")]
+    pub s_offset: f64,
+
+    #[serde(rename = "@max")]
+    pub max: f64,
+
+    #[serde(rename = "@unit")]
+    pub unit: Option<String>,
+
+}
+
+#[derive(Deserialize, Serialize, Debug)]
+pub struct LaneHeight {
+    #[serde(rename = "@inner")]
+    pub inner: f64,
+
+    #[serde(rename = "@outer")]
+    pub outer: f64,
+
+    #[serde(rename = "@sOffset")]
+    pub s_offset: f64,
+}
 
 #[derive(Deserialize, Serialize, Debug)]
 pub struct RoadLanesLaneSectionCenterLane {

@@ -6,7 +6,12 @@ authors.workspace = true
 edition.workspace = true
 
 [dependencies]
-bezier-rs = "0.4.0"
 uom = { version = "0.36.0",default-features = false, features = ["f64", "si", "std"] }
 vec1 = "1.12.1"
+quick-xml = { version = "0.29", optional = true ,features = ["serde-types", "serialize"]}
+serde = { version = "1.0.217", optional = true }
+
+[features]
+default = ["quick-xml"]  # Default build does not include quick-xml
+quick-xml = ["dep:quick-xml","dep:serde"]  # Enables XML parsing support
 

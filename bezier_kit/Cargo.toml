@@ -1,0 +1,6 @@
+[package]
+name = "bezier_kit"
+version.workspace = true
+license.workspace = true
+authors.workspace = true
+edition.workspace = true
